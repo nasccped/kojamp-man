@@ -16,8 +16,8 @@ FinalExeName    = Main
 
 
 # our escapes/strings variables
-T_MAGENTA_ESCAPE = \e[1;38;5;213m
-T_RED_ESCAPE     = \e[1;38;5;215m
+T_MAGENTA_ESCAPE = \e[1;38;5;219m
+T_RED_ESCAPE     = \e[1;38;5;1m
 RED_ESCAPE       = \e[1;31m
 GREEN_ESCAPE     = \e[1;32m
 YELLOW_ESCAPE    = \e[1;33m
