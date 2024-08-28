@@ -16,8 +16,9 @@ FinalExeName    = Main
 
 
 # our escapes/strings variables
+T_BLUE_ESCAPE    = \e[1;38;5;75m
 T_MAGENTA_ESCAPE = \e[1;38;5;219m
-T_RED_ESCAPE     = \e[1;38;5;1m
+T_RED_ESCAPE     = \e[1;38;5;9m
 RED_ESCAPE       = \e[1;31m
 GREEN_ESCAPE     = \e[1;32m
 YELLOW_ESCAPE    = \e[1;33m
@@ -28,11 +29,11 @@ TERMINAL_SEPARATOR = -----------------------------------------------------------
 
 # all script >>> will just print the help message
 all:
-	@echo  "$(TERMINAL_SEPARATOR)"                                                              ; \
-	printf "Are you trying to test $(T_MAGENTA_ESCAPE)Ko$(T_RED_ESCAPE)jamp$(RESET_ESCAPE)?\n\n"; \
-	printf "You can type:\n"                                                                    ; \
-	printf "\t$(YELLOW_ESCAPE)make build:$(RESET_ESCAPE) will build the outputs\n"              ; \
-	printf "\t$(YELLOW_ESCAPE)make run:$(RESET_ESCAPE)   will execute the outputs\n\n"          ;
+	@echo  "$(TERMINAL_SEPARATOR)"                                                                              ; \
+	printf "Are you trying to test $(T_MAGENTA_ESCAPE)Ko$(T_RED_ESCAPE)ja$(T_BLUE_ESCAPE)mp$(RESET_ESCAPE)?\n\n"; \
+	printf "You can type:\n"                                                                                    ; \
+	printf "\t$(YELLOW_ESCAPE)make build:$(RESET_ESCAPE) will build the outputs\n"                              ; \
+	printf "\t$(YELLOW_ESCAPE)make run:$(RESET_ESCAPE)   will execute the outputs\n\n"                          ;
 
 
 
