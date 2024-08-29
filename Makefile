@@ -19,9 +19,9 @@ FinalExeName    = Main
 T_BLUE_ESCAPE    = \e[1;38;5;75m
 T_MAGENTA_ESCAPE = \e[1;38;5;219m
 T_RED_ESCAPE     = \e[1;38;5;9m
-RED_ESCAPE       = \e[1;31m
-GREEN_ESCAPE     = \e[1;32m
-YELLOW_ESCAPE    = \e[1;33m
+RED_ESCAPE       = \e[1;38;5;196m
+GREEN_ESCAPE     = \e[1;38;5;83m
+YELLOW_ESCAPE    = \e[1;38;5;221m
 RESET_ESCAPE     = \e[0m
 TERMINAL_SEPARATOR = ----------------------------------------------------------------------
 
@@ -29,11 +29,11 @@ TERMINAL_SEPARATOR = -----------------------------------------------------------
 
 # all script >>> will just print the help message
 all:
-	@echo  "$(TERMINAL_SEPARATOR)"                                                                              ; \
-	printf "Are you trying to test $(T_MAGENTA_ESCAPE)Ko$(T_RED_ESCAPE)ja$(T_BLUE_ESCAPE)mp$(RESET_ESCAPE)?\n\n"; \
-	printf "You can type:\n"                                                                                    ; \
-	printf "\t$(YELLOW_ESCAPE)make build:$(RESET_ESCAPE) will build the outputs\n"                              ; \
-	printf "\t$(YELLOW_ESCAPE)make run:$(RESET_ESCAPE)   will execute the outputs\n\n"                          ;
+	@echo  "$(TERMINAL_SEPARATOR)"                                                                               ; \
+	printf "Are you trying to test $(T_MAGENTA_ESCAPE)Ko$(T_RED_ESCAPE)ja$(T_BLUE_ESCAPE)mp$(RESET_ESCAPE) ?\n\n"; \
+	printf "You can type:\n"                                                                                     ; \
+	printf "\t$(YELLOW_ESCAPE)make build:$(RESET_ESCAPE) will build the outputs\n"                               ; \
+	printf "\t$(YELLOW_ESCAPE)make run:$(RESET_ESCAPE)   will execute the outputs\n\n"                           ;
 
 
 
@@ -41,13 +41,13 @@ all:
 build: $(SourceFiles)
 	@if [ ! -d $(OutputDir) ]; then \
 		echo "$(TERMINAL_SEPARATOR)"                                                ; \
-		printf "The output folder $(RED_ESCAPE)was not found$(RESET_ESCAPE)...\n"   ; \
+		printf "The output folder $(RED_ESCAPE)was not found...$(RESET_ESCAPE)\n"   ; \
 		printf "We'll $(GREEN_ESCAPE)build one$(RESET_ESCAPE) for you! ^u^\n\n"     ; \
 		mkdir $(OutputDir)                                                          ; \
 	fi                                                                            ; \
 	$(CompileCommand) $< $(SpecifyDirFlag) $(OutputDir)
 	@echo "$(TERMINAL_SEPARATOR)"                                                 ; \
-	printf "The program $(GREEN_ESCAPE)was built successfully$(RESET_ESCAPE)!\n\n"
+	printf "The program $(GREEN_ESCAPE)was built successfully!$(RESET_ESCAPE)\n\n"
 
 
 
