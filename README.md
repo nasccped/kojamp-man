@@ -1,3 +1,28 @@
+<!--
+
+  Kojamp Man - README
+
+    This is Kojamp Man at `kojamp-man` github repository, developed
+    by @nasccped. You can access by here:
+
+      https://github.com/nasccped/kojamp-man
+
+    This project is 100% open source and free to use.
+
+    Did you want to contribute?
+    >>> Check `CONTRIBUTING.md` (if it exists)
+
+    Did you want to support me or the project?
+    >>> Consider give a star at the github repo
+
+    Something doesn't works well or it have an unexpected behavior?
+    >>> Consider open a issue
+
+    Thank you in advance for your attention S2
+
+  (Copyright (c) 2024 nasccped. All Rights Reserved.)
+
+-->
 Kojamp Man
 ==========
 

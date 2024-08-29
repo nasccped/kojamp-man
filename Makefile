@@ -1,3 +1,15 @@
+#--------------------------------------------------------------------
+# Kojamp Man - Makefile
+#
+#   This is the Kojamp Man Makefile!
+#
+#   Here, we'll be building cool stuff about the program, so, that
+#   can bu runned later...
+#
+#   All `Copy (c)` relevant content was already placed ad README.md
+#   file
+#--------------------------------------------------------------------
+
 # our command/flag variables
 CompileCommand = javac
 SpecifyDirFlag = -d
