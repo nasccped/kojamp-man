@@ -126,7 +126,7 @@ the following steps:
   make run
   ```
 
-  This will run the file!
+  This will run the program!
 
 <h4 align=center>
 
