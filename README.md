@@ -23,12 +23,18 @@
   (Copyright (c) 2024 nasccped. All Rights Reserved.)
 
 -->
+
+<h1 align=center>
+
 Kojamp Man
-==========
+
+[![version: 0.1.0](https://img.shields.io/badge/version-0.1.0-blue.svg)](#)
+[![license: Apache](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](#)
+[![based on: Java](https://img.shields.io/badge/based_on-Java-orange.svg)](#)
+
+</h1>
 
 This is Kojamp Man, a Java/Kotlin project manager tool!
-
-
 
 Dependencies
 ------------
@@ -121,3 +127,9 @@ the following steps:
   ```
 
   This will run the file!
+
+<h4 align=center>
+
+[![license: Apache](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](#)
+
+</h4>
