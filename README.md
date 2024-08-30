@@ -36,6 +36,8 @@ Kojamp Man
 
 This is Kojamp Man, a Java/Kotlin project manager tool!
 
+
+
 Dependencies
 ------------
 
@@ -127,6 +129,8 @@ the following steps:
   ```
 
   This will run the program!
+
+
 
 <h4 align=center>
 
