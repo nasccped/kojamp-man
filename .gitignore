@@ -4,5 +4,7 @@
 #
 #####################################################################
 
-# java bytecodes folder
+# java bytecodes folder and executables
 out
+*.exe
+**/*.exe
