@@ -28,7 +28,7 @@
 
 Kojamp Man
 
-[![version: 0.1.0](https://img.shields.io/badge/version-0.1.0-blue.svg)](#)
+[![version: beta 0.1.0](https://img.shields.io/badge/version-beta_0.1.0-red.svg)](#)
 [![license: Apache](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](#)
 [![based on: Java](https://img.shields.io/badge/based_on-Java-orange.svg)](#)
 
