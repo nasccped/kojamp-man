@@ -13,11 +13,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TEST_ESCAPE "\033[3m"
+#define RSET_ESCAPE "\033[0m"
+
 int main(int argc, char *argv[]) {
 
   // FIX: still in tests!
+  printf("Hello world, from C Lang\n\n");
 
-  printf("Hello world, from C Lang\n");
+  printf("Let's run a Java program? %s(y: yes, n: no)%s\n",
+         TEST_ESCAPE, RSET_ESCAPE);
+
+  char response;
+  scanf("%c", &response);
+
+  printf("\n");
+
+  if (response == 'n') {
+
+    printf("Sure! Quitting");
+
+  } else if (response == 'y') {
+
+    char java_command[] = "java --class-path out Main";
+
+    system(java_command);
+
+  } else {
+
+    printf("'Da heel bro '-'");
+  }
+
+  printf("\n\n");
 
   return 0;
 }
