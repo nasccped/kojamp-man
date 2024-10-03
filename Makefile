@@ -55,7 +55,7 @@ build:
 	@printf "\n"                                                                                                      ;
 	@for outFile in $(ExpectedOutputs)                                                                                ; do   \
 		if [ -f $$outFile ]                                                                                             ; then \
-			printf " $(ESCAPE_B_RED)error:$(ESCAPE_RESET) $$outFile already exists!"                                      ;      \
+			printf " $(ESCAPE_B_RED)error:$(ESCAPE_RESET) $(ESCAPE_I)<$$outFile>$(ESCAPE_RESET) already exists!"          ;      \
 			printf "\n\n"                                                                                                 ;      \
 			printf " If you want to rebuild the entire project, try\n\n"                                                  ;      \
 			printf " \t$(ESCAPE_YELLOW)1.$(ESCAPE_RESET) make clean\n"                                                    ;      \
