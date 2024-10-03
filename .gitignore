@@ -10,3 +10,4 @@ out
 **/*.exe
 *.out
 **/*.out
+bin/**
