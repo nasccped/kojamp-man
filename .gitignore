@@ -11,3 +11,4 @@ out
 *.out
 **/*.out
 bin/**
+setup/Makefile
