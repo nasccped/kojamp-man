@@ -10,9 +10,7 @@
  *    should. So, here is the program!
  *
  * ----------------------------------------------------------------*/
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "headers/_include_.h"
 
 int main(int argc, char *argv[]) {
 
