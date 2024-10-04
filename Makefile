@@ -62,31 +62,6 @@ all:
 
 
 
-# build recipe >>> will generate the output exe (bytecode)
-build:
-	@printf "\n"                                                                                                      ;
-	@for outFile in $(ExpectedOutputs)                                                                                ; do   \
-		if [ -f $$outFile ]                                                                                             ; then \
-			printf " $(ESCAPE_B_RED)error:$(ESCAPE_RESET) $(ESCAPE_I)<$$outFile>$(ESCAPE_RESET) already exists!"          ;      \
-			printf "\n\n"                                                                                                 ;      \
-			printf " If you want to rebuild the entire project, try\n\n"                                                  ;      \
-			printf " \t$(ESCAPE_YELLOW)1.$(ESCAPE_RESET) make clean\n"                                                    ;      \
-			printf " \t$(ESCAPE_YELLOW)2.$(ESCAPE_RESET) make build\n"                                                    ;      \
-			printf "\n"                                                                                                   ;      \
-			exit 1                                                                                                        ;      \
-		fi                                                                                                              ;      \
-	done                                                                                                              ;
-	@if [ ! -d $(OutputDir) ]                                                                                         ; then \
-		mkdir $(OutputDir)                                                                                              ;      \
-	fi                                                                                                                ;
-	@printf " $(ESCAPE_B_GREEN)Building$(ESCAPE_RESET) outputs... $(ESCAPE_I)(this can take a while)$(ESCAPE_RESET)\n";
-	@$(CompileCommand) $(SourceFiles) $(SpecifyDirFlag) $(OutputDir)                                                  ;
-	@printf "\n"                                                                                                      ;
-	@printf " The program $(ESCAPE_B_GREEN)was built successfully!$(ESCAPE_RESET)\n"                                  ;
-	@printf "\n"                                                                                                      ;
-
-
-
 binary:
 	@printf "\n"                                                                                                                              ;
 	@if [ -x $(FinalExe) ]                                                                                                                    ; then \
