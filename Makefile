@@ -27,7 +27,7 @@ SetupDir         = ./setup
 BinDir           = ./bin
 SourceFiles      = $(wildcard $(SourceDir)/*.java)
 ExpectedOutputs  = $(patsubst $(SourceDir)/%, $(OutputDir)/%, $(patsubst %.java, %.class, $(SourceFiles)))
-CSource          = $(SetupDir)/kojamp.c
+CSource          = $(wildcard $(SetupDir)/*.c)
 FinalExe         = $(BinDir)/kojamp
 SourceCollection = $(foreach sfile, $(wildcard $(SetupDir)/*.c) $(wildcard $(SetupDir)/*.h), $(lastword $(subst /, , $(sfile))))
 FinalExeName     = Main
@@ -70,8 +70,8 @@ binary:
 		printf " └─ $(ESCAPE_B_YELLOW)You can try:$(ESCAPE_RESET)\n"                                                                            ;      \
 		printf " \t└ $(ESCAPE_B_BLUE)1. $(ESCAPE_YELLOW)make clean:$(ESCAPE_RESET)  will delete the binary folder\n"                            ;      \
 		printf " \t└ $(ESCAPE_B_BLUE)2. $(ESCAPE_YELLOW)make binary:$(ESCAPE_RESET) will build the binaries $(ESCAPE_I)(again)$(ESCAPE_RESET)\n";      \
-	elif [ ! -f $(CSource) ]                                                                                                                  ; then \
-		printf " $(ESCAPE_B_RED)◆ ERROR:$(ESCAPE_RESET) C file $(ESCAPE_I)< $(CSource) >$(ESCAPE_RESET) was not found!\n"                       ;      \
+	elif [ "$(CSource)" == "" ]                                                                                                               ; then \
+		printf " $(ESCAPE_B_RED)◆ ERROR:$(ESCAPE_RESET) Setup dir doesn't exists/have C files!\n"                                               ;      \
 		printf " │\n"                                                                                                                           ;      \
 		printf " └─ $(ESCAPE_B_YELLOW)Check how to fix$(ESCAPE_RESET) at $(ESCAPE_I)$(RepoURL)$(ESCAPE_RESET)\n"                                ;      \
 	else                                                                                                                                             \
