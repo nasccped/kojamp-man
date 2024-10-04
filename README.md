@@ -117,53 +117,24 @@ the following steps:
   cd kojamp-man
   ```
 
-4. Install and run:
+4. Compile:
 
-  Within the cloned repo, we have some file(s) called **kjmp**. It's
-  an installation script!
+  Within the cloned repo, we have some setupe file(s) at  **setup/**
+  dir. You can compile them by the root _Makefile_.
 
-  To install the program, you can run that script by typing:
-
-  ```shell
-  kjmp install
-  ```
-
----
-
-  You can also get more details about the install script by just
-  typing:
+  To compile the program, you can run the Makefile by typing:
 
   ```shell
-  kjmp
+  # it will generate the C files output
+  # you will need the MAKE GNU and gcc to compile it
+  make binary
   ```
-
-> [!WARNING]
->
-> In some cases, the machine won't get permission to run exe/script
-> files from the current directory, so, if `kjmp` command doesn't
-> works, try use `./kjmp`. Do the same thing and it works!!!
->
-> ---
->
-> For now, I have write just a powershell script, so... to run the
-> installation script it's necessary to have the powershell program
-> at your machine. But, don't worry. I will build a install program
-> to anothers programs too _(.nix, .sh, ...)_.
->
-> ---
->
-> The kjmp.ps1 script it's slow, ugly and very poorly done. I just
-> want to push this current work to remote repo soon. I will fix it!
 
   And finally, to run the final product, just type:
 
   ```shell
-  kojamp
+  bin/kojamp
   ```
-
-> [!NOTE]
->
-> Remember the `program` and `./program` thing!
 
 
 
