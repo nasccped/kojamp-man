@@ -1,5 +1,5 @@
-#ifndef _INCLUDE__H
-#define _INCLUDE__H
+#ifndef __INCLUDE__H_
+#define __INCLUDE__H_
 
 #ifndef _STDIO_H_
   #include <stdio.h>
