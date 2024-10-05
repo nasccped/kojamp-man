@@ -17,4 +17,8 @@
   #include <unistd.h>
 #endif
 
+#ifndef _STDBOOL_H_
+  #include <stdbool.h>
+#endif
+
 #endif
