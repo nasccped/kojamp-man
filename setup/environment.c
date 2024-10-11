@@ -50,6 +50,7 @@ struct LogList environment_run() {
                           FAIL                                      ,
                           "Binary folder directory could not be "
                           "set. Returned NULL!"                     );
+  }
 
   // returning our LogList variable
   return returnable;
