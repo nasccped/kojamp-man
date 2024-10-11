@@ -42,10 +42,14 @@ struct LogList environment_run() {
     append_log                      // append_log function
   };
 
-  // appending some test values
-  returnable.append_log(&returnable, OK     ,"Everythin is OK"     );
-  returnable.append_log(&returnable, WARNING,"Something went wrong");
-  returnable.append_log(&returnable, NONE   ,"Nothing to say"      );
+  // if getcwd result in a error (NULL)
+  if(getcwd(KOJAMP_BINARY_DIRECTORY, MAX_DIRECTORY_LENGTH) == NULL) {
+
+    // append a new fail log
+    returnable.append_log(&returnable                               ,
+                          FAIL                                      ,
+                          "Binary folder directory could not be "
+                          "set. Returned NULL!"                     );
 
   // returning our LogList variable
   return returnable;
