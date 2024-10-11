@@ -10,11 +10,28 @@
  *    should. So, here is the program!
  *
  * ----------------------------------------------------------------*/
-#include "headers/_include_.h"
+// including all needed header files
+#include "headers/_include_.h"    // _include_ (cointains all includes)
+#include "headers/environment.h"  // environment (extern vars and defines)
+#include "headers/log.h"          // log (structs, enums, functions declarations, etc)
 
+// main function
 int main(int argc, char *argv[]) {
 
-  printf("Now, it's \033[35m__kojamp__.c\033[0m\n");
+  // break line
+  printf("\n");
+
+  // creating our environment LogList
+  struct LogList env_loglist = environment_run();
+
+  // let's display all Log from our LogList
+  display_loglist(&env_loglist);
+
+  // we can't forget to free our pointers :^)
+  free_loglist(&env_loglist, true);
+
+  // break line
+  printf("\n");
 
   return 0;
 }
