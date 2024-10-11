@@ -11,9 +11,9 @@ struct LogList environment_run(void);
 
 // defining our constants -------------------------------------------
 #if (defined _WIN32) || (defined _WIN64)
-  static const char* DIRECTORY_SEPARATOR = "\\";
+  static const char *DIRECTORY_SEPARATOR = "\\";
 #else
-  static const char* DIRECTORY_SEPARATOR = "/";
+  static const char *DIRECTORY_SEPARATOR = "/";
 #endif
 
 // max length that a directory path can store
