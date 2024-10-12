@@ -30,9 +30,9 @@ char STATUS_TEXT[STATUS_TEXT_LENGTH];
  *  In this case, the function will stop immediately by the return
  *  keyword
  * --------------------------------------------------------------- */
-void append_log(struct LogList *self,
-                Status   status     ,
-                char    *message    ) {
+void append_log(struct LogList *self   ,
+                Status          status ,
+                char           *message) {
 
   // if LogList addres is invalid
   if (self == NULL || self -> array == NULL)
@@ -138,8 +138,8 @@ void display_loglist(struct LogList *self) {
   strncpy(HOLD_ESCAPE, BOLD_YEL_NON, MAX_ESCAPE_LENGTH);
 
   // print the loglist header
-  printf("|> %s%s:%s\n"
-         "|\n"         ,
+  printf(" %s%s:%s\n"
+         "\n"         ,
          HOLD_ESCAPE   ,
          self -> title ,
          NONE_NON_NON  );
@@ -148,13 +148,13 @@ void display_loglist(struct LogList *self) {
   for (int i = 0; i < self -> length; i++) {
 
     // print the STATUS MARK
-    printf("|--- ");
+    printf("  > ");
 
     // call other function to print the content
     display_log(self -> array[i]);
 
     // break line
-    printf("|\n");
+    printf("\n");
   }
 }
 
@@ -212,5 +212,5 @@ void display_log(Log *self) {
          NONE_NON_NON); //   - escape reset
 
   // message
-  printf("|\t%s\n", self -> message);
+  printf("    %s\n", self -> message);
 }
