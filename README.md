@@ -28,9 +28,9 @@
 
 Kojamp Man
 
-[![version: beta 0.1.0](https://img.shields.io/badge/version-beta_0.1.0-red.svg)](#)
-[![license: Apache](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](#)
-[![based on: Java](https://img.shields.io/badge/based_on-Java-orange.svg)](#)
+[![version: beta 0.1.0][kojamp-man-version]](#)
+[![license: Apache][kojamp-man-license]](#)
+[![based on: Java][kojamp-based]](#)
 
 </h1>
 
@@ -140,6 +140,11 @@ the following steps:
 
 <h4 align=center>
 
-[![license: Apache](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](#)
+[![license: Apache][kojamp-man-license]](#)
 
 </h4>
+
+
+[kojamp-man-version]: https://img.shields.io/badge/version-beta_0.1.0-red.svg
+[kojamp-man-license]: https://img.shields.io/badge/license-Apache_2.0-blue.svg
+[kojamp-based]: https://img.shields.io/badge/based_on-Java%2FC-orange.svg
