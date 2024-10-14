@@ -11,9 +11,17 @@
  *
  * ----------------------------------------------------------------*/
 // including all needed header files
-#include "headers/_include_.h"    // _include_ (cointains all includes)
-#include "headers/environment.h"  // environment (extern vars and defines)
-#include "headers/log.h"          // log (structs, enums, functions declarations, etc)
+#ifndef __INCLUDE__H_
+  #include "headers/_include_.h"    // _include_ (cointains all includes)
+#endif
+
+#ifndef _ENVIRONMENT_H_
+  #include "headers/environment.h"  // environment (extern vars and defines)
+#endif
+
+#ifndef _LOG_H_
+  #include "headers/log.h"          // log (structs, enums, functions declarations, etc)
+#endif
 
 // main function
 int main(int argc, char *argv[]) {
@@ -21,14 +29,13 @@ int main(int argc, char *argv[]) {
   // break line
   printf("\n");
 
-  // creating our environment LogList
-  struct LogList env_loglist = environment_run();
+  // building all Logs constants
+  log_main();
+
+  environment_main(&ENV_CHECKER_LOGLIST);
 
   // let's display all Log from our LogList
-  display_loglist(&env_loglist);
-
-  // we can't forget to free our pointers :^)
-  free_loglist(&env_loglist, true);
+  display_loglist(&ENV_CHECKER_LOGLIST);
 
   // break line
   printf("\n");

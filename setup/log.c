@@ -1,116 +1,70 @@
-// our includes
-#include "headers/_include_.h" // _include_.h
-#include "headers/log.h"       // log.h
-#include "headers/colors.h"    // colors.h
+// our conditional includes -----------------------------------------
+#ifndef __INCLUDE__H_
+  #include "headers/_include_.h" // _include_.h
+#endif
+
+#ifndef _LOG_H_
+  #include "headers/log.h"       // log.h
+#endif
+
+#ifndef _COLORS_H_
+  #include "headers/colors.h"    // colors.h
+#endif
 
 // variable call ----------------------------------------------------
 char HOLD_ESCAPE[MAX_ESCAPE_LENGTH ];
 char STATUS_TEXT[STATUS_TEXT_LENGTH];
+struct Log LOGLIST_IS_EMPTY;
+struct Log BIN_DIR_IS_NULL ;
+
+/* Function: log_main
+ * ------------------
+ *  This function store values in all Log structs that will be used
+ *  by the program.
+ *
+ *  Return nothing. Just update the values
+ */
+void log_main() {
+
+  LOGLIST_IS_EMPTY.status   = OK            ;
+  LOGLIST_IS_EMPTY.message  = LOG_IS_EMP_STR;
+
+  BIN_DIR_IS_NULL.status  = FAIL              ;
+  BIN_DIR_IS_NULL.message = BIN_DIR_IS_NLL_STR;
+
+}
 
 /* Function: append_log
  * --------------------
- *  This function receive 3 arguments:
- *    - self   :   LogList struct pointer
- *    - status :   Status enum value
- *    - message:   String (char pointer) content
+ *  This function receive 2 arguments:
+ *    - self    : LogList struct pointer
+ *    - new_log : Log struct pointer
  *
- *  It will take the self pointer and test if it's a valid pointer
- *  (not equals NULL). If true, the function will generate a Log
- *  struct pointer by malloc function, insert status and message on
- *  it. Then, will increase `sizeof` LogList array pointer by using
- *  realloc and finally append the created Log pointer to the array
- *
- *  This function doesn't return nothing, just update the LogList
- *  values by getting the variable address
- *
- *  If some unexpected behaviour occurs (like memory error
- *  allocation) all the LogList pointer content (array and his
- *  elements) will be free'd and LogList length will be updated to -1
- *
- *  In this case, the function will stop immediately by the return
- *  keyword
+ *  This function doesn't return nothing, just take the LogList
+ *  pointer and iterate on it until get the NULL Log pointer. Then,
+ *  insert the *new_log to this pointer
  * --------------------------------------------------------------- */
-void append_log(struct LogList *self   ,
-                Status          status ,
-                char           *message) {
+void append_log(struct LogList *self, struct Log *new_log) {
 
-  // if LogList addres is invalid
-  if (self == NULL || self -> array == NULL)
+  // if invalid address
+  if (self == NULL || new_log == NULL)
     return; // return function
 
-  // if LogList array is invalid
-  if (self -> array == NULL) {
-    self -> length = -1; // update lenth to warn error
-    return             ; // return function
+  // if LogList is empty
+  if (self -> linked_logs == NULL) {
+    self -> linked_logs = new_log; // insert at linked_log root
+    return                       ; // break the function
   }
 
-  // storing array in a temporary pointer
-  Log **temp_logs = self -> array;
+  // else, copy the first linked_log pointer
+  struct Log *pnt = self -> linked_logs;
 
-  // doing memory reallocation by adding 1 Log pointer
-  temp_logs = realloc(temp_logs, sizeof(self -> array) + sizeof(Log *));
+  // while next log is not null
+  while (pnt -> next_log != NULL)
+    pnt = pnt -> next_log; // take it
 
-  // if reallocation fails
-  if (temp_logs == NULL) {
-    free_loglist(self, true); // free the LogList pointers
-    return                  ; // return function
-  }
-
-  // update in the LogList addred:
-  self -> array = temp_logs; // old array pointer -> new realloc'ed array
-  self -> length++         ; // lenght incremented by 1
-
-  // create a new pointer (will be added to list)
-  Log *current_log = (Log *)malloc(sizeof(Log *));
-
-  // if the pointer is invalid
-  if (current_log == NULL) {
-    free_loglist(self, true); // free the LogList pointers
-    return                  ; // return function
-  }
-
-  // update on the new created pointer
-  current_log -> status  = status ; // the Status enum
-  current_log -> message = message; // the message String
-
-  // define the target index
-  int insert_at = self -> length - 1;
-
-  // insert on it
-  self -> array[insert_at] = current_log;
-}
-
-/* Function: free_loglist
- * ----------------------
- *  This function receive:
- *    - self        : LogList struct pointer
- *    - error_occurs: boolean (bool)
- *
- *  It will take the self pointer and do some tests (if it's valid).
- *  Then, if everything is OK, will free each pointer from the
- *  LogList array and the array itself
- * --------------------------------------------------------------- */
-void free_loglist(struct LogList *self, bool error_occurs) {
-
-  // if the given pointer is invalid
-  if (self == NULL)
-    return; // return function
-
-  // if array pointer is already null
-  if (self -> array == NULL) {
-    self -> length = -1; // update the length
-    return             ; // return function
-  }
-
-  // for each element of the array
-  for (int i = 0; i < self -> length; i++)
-    free(self -> array[i]); // free it
-
-  // free the array itself
-  free(self -> array);
-
-  // lenght update (-1 if error occcurs | 0 if not error)
-  self -> length = (error_occurs) ? -1 : 0;
+  // insert *new_log as `next_log`
+  pnt -> next_log = new_log;
 }
 
 /* Function: display_loglist
@@ -118,17 +72,13 @@ void free_loglist(struct LogList *self, bool error_occurs) {
  *  This function receive just one argument:
  *    - self: LogList struct pointer
  *
- *  The purpose of this function is only display each element
- *  allocated on the array, so... if the self pointer even array
- *  pointer equals NULL, the function will be terminated (return)
- *
- *  Otherwise, the function will print the Log's status and messages
- *  by a for lop
+ *  The purpose of this function is only display the LogList title
+ *  and each element inside it.
  * --------------------------------------------------------------- */
 void display_loglist(struct LogList *self) {
 
-  // if invalid pointers
-  if (self == NULL || self -> array == NULL)
+  // if invalid pointer
+  if (self == NULL)
     return; // return
 
   // clear HOLD_ESCAPE
@@ -140,77 +90,93 @@ void display_loglist(struct LogList *self) {
   // print the loglist header
   printf(" %s%s:%s\n"
          "\n"         ,
-         HOLD_ESCAPE   ,
-         self -> title ,
-         NONE_NON_NON  );
+         HOLD_ESCAPE  ,
+         self -> title,
+         NONE_NON_NON );
 
-  // for each Log struct on the array
-  for (int i = 0; i < self -> length; i++) {
+  // if the LogList is empty (It's an unexpectedly behavior, even no
+  // Logs appended)
+  if (self -> linked_logs == NULL)
+    printf("   This LogList is unexpectedly empty :(\n");
 
-    // print the STATUS MARK
-    printf("  > ");
-
-    // call other function to print the content
-    display_log(self -> array[i]);
-
-    // break line
-    printf("\n");
-  }
+  // if linked_logs equals to NULL, nothing will hapen. This is a
+  // safe function call ;^)
+  display_log(self -> linked_logs);
 }
 
 /* Function: display_log
  * ---------------------
- *  This function receive one argument:
+ *  This function receive 1 argument:
  *    - self: Log struct pointer
  *
  *  The purpose of this function is just print the Log struct
  *  contents in a pretty way
  * --------------------------------------------------------------- */
-void display_log(Log *self) {
+void display_log(struct Log *self) {
 
   // if given pointer is invalid (NULL)
   if (self == NULL)
     return; // return
 
-  // clear HOLD_ESCAPE variable
-  strcpy(HOLD_ESCAPE, "");
+  // getting the current log struct pointer
+  struct Log *current_log = self;
 
-  // switch case by Log struct Status
-  //    - will update the STATUS_TEXT according to the status
-  //    - will updated the HOLD_ESCAPE according to the status
-  switch (self -> status) {
+  // while this pointer is not null (is equals to a define Log
+  // struct)
+  while (current_log != NULL) {
 
-    // if status is OK
-    case OK:
-      strncpy(STATUS_TEXT, "OK"        , STATUS_TEXT_LENGTH);
-      strncpy(HOLD_ESCAPE, NONE_GRE_NON, MAX_ESCAPE_LENGTH );
-      break;
+    // print the STATUS MARK
+    printf("  > ");
 
-    // if status is FAIL
-    case FAIL:
-      strncpy(STATUS_TEXT, "FAIL"      , STATUS_TEXT_LENGTH);
-      strncpy(HOLD_ESCAPE, NONE_RED_NON, MAX_ESCAPE_LENGTH );
-      break;
+    // clear HOLD_ESCAPE variable
+    strcpy(HOLD_ESCAPE, "");
 
-    // if status is WARNING
-    case WARNING:
-      strncpy(STATUS_TEXT, "WARNING"   , STATUS_TEXT_LENGTH);
-      strncpy(HOLD_ESCAPE, NONE_MAG_NON, MAX_ESCAPE_LENGTH );
-      break;
+    // switch case by Log struct Status
+    //    - will update the STATUS_TEXT according to the status
+    //    - will updated the HOLD_ESCAPE according to the status
+    switch (current_log -> status) {
 
-    // if status is other type (NONE maybe)
-    default:
-      strncpy(STATUS_TEXT, "MESSAGE"   , STATUS_TEXT_LENGTH);
-      strncpy(HOLD_ESCAPE, NONE_BLU_NON, MAX_ESCAPE_LENGTH );
-      break;
+      // if status is OK
+      case OK:
+        strncpy(STATUS_TEXT, "OK"        , STATUS_TEXT_LENGTH);
+        strncpy(HOLD_ESCAPE, NONE_GRE_NON, MAX_ESCAPE_LENGTH );
+        break;
+
+      // if status is FAIL
+      case FAIL:
+        strncpy(STATUS_TEXT, "FAIL"      , STATUS_TEXT_LENGTH);
+        strncpy(HOLD_ESCAPE, NONE_RED_NON, MAX_ESCAPE_LENGTH );
+        break;
+
+      // if status is WARNING
+      case WARNING:
+        strncpy(STATUS_TEXT, "WARNING"   , STATUS_TEXT_LENGTH);
+        strncpy(HOLD_ESCAPE, NONE_MAG_NON, MAX_ESCAPE_LENGTH );
+        break;
+
+      // if status is other type (NONE maybe)
+      default:
+        strncpy(STATUS_TEXT, "MESSAGE"   , STATUS_TEXT_LENGTH);
+        strncpy(HOLD_ESCAPE, NONE_BLU_NON, MAX_ESCAPE_LENGTH );
+        break;
+    }
+
+    // printing content
+    printf("%s%s:%s\n" ,  // header by getting:
+           HOLD_ESCAPE ,  //   - status color escape
+           STATUS_TEXT ,  //   - status text value
+           NONE_NON_NON); //   - escape reset
+
+    // while the message current line isn't equals to NULL (content
+    // end)
+    for (int i = 0; current_log -> message[i] != NULL; i++)
+      printf("    %s\n"               ,
+             current_log -> message[i]); // print that line
+
+    // break one line to the next Log struct
+    printf("\n");
+
+    // update current log pointer to the next one
+    current_log = current_log -> next_log;
   }
-
-  // printing content
-  printf("%s%s:%s\n" ,  // header by getting:
-         HOLD_ESCAPE ,  //   - status color escape
-         STATUS_TEXT ,  //   - status text value
-         NONE_NON_NON); //   - escape reset
-
-  // message
-  printf("    %s\n", self -> message);
 }

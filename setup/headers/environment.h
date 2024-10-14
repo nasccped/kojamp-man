@@ -6,30 +6,37 @@
   #include "log.h"  // include it
 #endif
 
-// main function at environment.c (it will return a LogList struct)
-struct LogList environment_run(void);
+// stdbool.h contents will be necessary, so:
+#ifndef _STDBOOL_H_
+  #include <stdbool.h> // include stdbool too
+#endif
+
+// main function at environment.c
+void environment_main(struct LogList *dest);
 
 // defining our constants -------------------------------------------
 #if (defined _WIN32) || (defined _WIN64)
   static const char *DIRECTORY_SEPARATOR = "\\";
 #else
-  static const char *DIRECTORY_SEPARATOR = "/";
+  static const char *DIR_SEPARATOR = "/";
 #endif
 
-static const char *GO_BACK_A_DIRECTORY = ".."   ;
-static const char *EXPECTED_OUT_NAME   = "out"  ;
-static const char *EXPECTED_GIT_NAME   = ".git" ;
-static const char *EXPECTED_SRC_NAME   = "src"  ;
-static const char *EXPECTED_STP_NAME   = "setup";
+// expected dirs
+static const char *GO_BACK_A_DIR    = ".."   ;
+static const char *EXPECTED_OUT_DIR = "out"  ;
+static const char *EXPECTED_GIT_DIR = ".git" ;
+static const char *EXPECTED_SRC_DIR = "src"  ;
+static const char *EXPECTED_STP_DIR = "setup";
 
 // max length that a directory path can store
-#define MAX_DIRECTORY_LENGTH 250
+#define DIR_MAX_LENGHT 300
 
 // exporting our variables ------------------------------------------
-extern char KOJAMP_BINARY_DIRECTORY[MAX_DIRECTORY_LENGTH];
-extern char KOJAMP_OUTPUT_DIRECTORY[MAX_DIRECTORY_LENGTH];
-extern char KOJAMP_GIT_DIRECTORY[MAX_DIRECTORY_LENGTH]   ;
-extern char KOJAMP_SOURCE_DIRECTORY[MAX_DIRECTORY_LENGTH];
-extern char KOJAMP_SETUP_NAME[MAX_DIRECTORY_LENGTH]      ;
+extern char KOJAMP_ROT_DIR[DIR_MAX_LENGHT];
+extern char KOJAMP_BIN_DIR[DIR_MAX_LENGHT];
+extern char KOJAMP_OUT_DIR[DIR_MAX_LENGHT];
+extern char KOJAMP_GIT_DIR[DIR_MAX_LENGHT];
+extern char KOJAMP_SRC_DIR[DIR_MAX_LENGHT];
+extern char KOJAMP_STP_DIR[DIR_MAX_LENGHT];
 
 #endif

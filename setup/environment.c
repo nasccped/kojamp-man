@@ -1,61 +1,54 @@
-#include "headers/_include_.h"
-#include "headers/environment.h"
+// our conditional imports ------------------------------------------
+#ifndef __INCLUDE__H_
+  #include "headers/_include_.h" // _include_.h
+#endif
+
+#ifndef _LOG_H_
+  #include "headers/log.h" // log.h
+#endif
+
+#ifndef _ENVIRONMENT_H_
+  #include "headers/environment.h" // environment
+#endif
 
 // variable call ----------------------------------------------------
-char KOJAMP_BINARY_DIRECTORY[MAX_DIRECTORY_LENGTH];
+char KOJAMP_ROT_DIR[DIR_MAX_LENGHT];
+char KOJAMP_BIN_DIR[DIR_MAX_LENGHT];
 
 /* Function: environment_run
  * -------------------------
  *  Run the environment initial tasks, such as:
- *    - get binary directory
- *    - get output directory
- *    - get .git directory
+ *    - get necessary directories
  *
- *  It will start an empty LogList variable with:
- *    - string     title
- *    - malloc'ed  array
- *    - 0          length
- *    - function   pointer
+ *  It will take a LogList struct pointer argument and append
+ *  pointer values to it by doing subtasks:
  *
- *  For each subtask done, will append a Log struct pointer to the
- *  LogList array. the Log struct will contain:
+ *  The pointer to be appended is a Log struct pointer type. The Log
+ *  struct will contain:
  *
- *    - enum  Status   < OK | FAIL | WARNING | NONE >
- *    - char* message  < some text description of the subtask >
- *    ---------------------------------------------------------
+ *    - enum   Status   < OK | FAIL | WARNING | NONE >
+ *    - char **message  < some text description of the subtask >
+ *    ----------------------------------------------------------
  *    The Status value will be acording on subtask situation
- *
- *  If something goes wrong, all pointers in LogArray will be free'd,
- *  length (LogArray size) will be updated to -1 and the LogList
- *  variable will be returned immediately
- *
- *  Don't worry. Everything will work. It will return a -1 lenght
- *  only if a memory allocation error or something related occurs
  * --------------------------------------------------------------- */
-struct LogList environment_run() {
+void environment_main(struct LogList *dest) {
 
-  // starting our LogList variable with empty values:
-  struct LogList returnable = {
-    "Environment Checker"         , // LogList    title
-    (Log **)malloc(sizeof(Log **)), // malloc'ed  array
-    0                             , // 0          size
-    append_log                      // append_log function
-  };
+  // if given pointer is null, abort function
+  if (dest == NULL)
+    return;
 
   // if getcwd result in a error (NULL)
-  if(getcwd(KOJAMP_BINARY_DIRECTORY, MAX_DIRECTORY_LENGTH) == NULL) {
+  if (getcwd(KOJAMP_BIN_DIR, DIR_MAX_LENGHT) == NULL) {
 
-    // append a new fail log
-    returnable.append_log(&returnable                               ,
-                          FAIL                                      ,
-                          "Binary folder directory could not be "
-                          "set. Returned NULL!"                     );
+    // append this Log to the List
+    append_log(dest, &BIN_DIR_IS_NULL);
 
-    // return LogList (operations can't continue with an invalid bin
+    // abort function (operations can't continue with an invalid bin
     // path)
-    return returnable;
+    return;
   }
 
-  // returning our LogList variable
-  return returnable;
+  // if our final LogList is empty
+  if (dest -> linked_logs == NULL)
+    append_log(dest, &LOGLIST_IS_EMPTY); // append 'NO ERRORS' log
 }
