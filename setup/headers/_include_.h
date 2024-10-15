@@ -1,6 +1,8 @@
 #ifndef __INCLUDE__H_ // if _include_.h isn't already defined
 #define __INCLUDE__H_ // define it
 
+int main(int argc, char *argv[]);
+
 // include stdio
 #ifndef _STDIO_H_
   #include <stdio.h>
