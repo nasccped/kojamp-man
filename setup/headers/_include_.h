@@ -26,4 +26,8 @@
   #include <stdbool.h>
 #endif
 
+#ifndef _SYS_STAT_H_
+  #include <sys/stat.h>
+#endif
+
 #endif
