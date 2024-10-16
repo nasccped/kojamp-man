@@ -7,9 +7,8 @@
 #endif
 
 
-int main(int argc, char *argv[]) {
+void binary() {
 
-  binary();
+  printf("binary function was called!\n");
 
-  return 0;
 }
