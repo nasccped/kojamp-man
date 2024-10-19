@@ -7,8 +7,10 @@
 #endif
 
 
+// binary file 'main' function
 void binary() {
 
+  // simple print
   printf("binary function was called!\n");
 
 }
