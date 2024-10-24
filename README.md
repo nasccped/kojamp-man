@@ -28,9 +28,10 @@
 
 Kojamp Man
 
-[![version: beta 0.1.0][kojamp-man-version]](#)
-[![license: Apache][kojamp-man-license]](#)
-[![based on: Java][kojamp-based]](#)
+[![version        : beta 0.1.0][kojamp-man-version]](#)
+[![license        : Apache    ][kojamp-man-license]](#)
+[![builded on     : Java      ][kojamp-builded]](#)
+[![also builded on: C         ][kojamp-builded-also]](#)
 
 </h1>
 
@@ -145,6 +146,7 @@ the following steps:
 </h4>
 
 
-[kojamp-man-version]: https://img.shields.io/badge/version-beta_0.1.0-red.svg
-[kojamp-man-license]: https://img.shields.io/badge/license-Apache_2.0-blue.svg
-[kojamp-based]: https://img.shields.io/badge/based_on-Java%2FC-orange.svg
+[kojamp-man-version]: https://img.shields.io/badge/Version-beta_0.1.0-red?style=for-the-badge&logo=git&logoColor=white
+[kojamp-man-license]: https://img.shields.io/badge/License-Apache_2.0-blue?style=for-the-badge&logo=amazoniam&logoColor=white
+[kojamp-builded]: https://img.shields.io/badge/Builded_on-Java-orange?style=for-the-badge
+[kojamp-builded-also]: https://img.shields.io/badge/Also_builded_on-C-blue?style=for-the-badge
