@@ -1,16 +1,1 @@
-#####################################################################
-#
-# let's ignore some useless / trash contents
-#
-#####################################################################
-
-# java bytecodes folder and executables
-out
-*.exe
-**/*.exe
-*.out
-**/*.out
-bin/**
-setup/Makefile
-
-tests/**
+target/
